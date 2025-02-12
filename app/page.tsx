@@ -1,31 +1,31 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/auth";
+import LoginComponents from "@/components/login-components";
+import Spotify from "@/components/svg/spotify";
+
 import { Source_Code_Pro } from "next/font/google";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 const scp = Source_Code_Pro({
   subsets: ["latin"],
+  weight: "400",
+});
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-
-})
-export default function Home() {
-
-  const handleClik = async() => {
-    const data = await authClient.signIn.social({
-      provider: "spotify"
-    })
-
-    console.log(data)
+  if (session) {
+    redirect("/intl-id");
   }
-
   return (
-    <div>
-      <Button
-        onClick={handleClik}
-        variant="default"
-        className={`${scp.className} text-lg`}
-      >
-        Sign in with Spotify
-      </Button>
+    <div
+      className={`flex flex-col items-center justify-center min-h-screen gap-2 bg-black text-white ${scp.className}`}
+    >
+      <Spotify className="w-20 h-20 mb-6 items-center  " />
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-2">Login with Spotify</h1>
+        <LoginComponents />
+      </div>
     </div>
   );
 }
