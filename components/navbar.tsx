@@ -1,12 +1,4 @@
 "use client";
-import React from "react";
-import { client } from "@/lib/auth-client";
-import Image from "next/image";
-import Link from "next/link";
-import Spotify from "./svg/spotify";
-import { scp } from "@/constants/font";
-import { typeNavbar } from "@/types";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +13,14 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { scp } from "@/constants/font";
+import { client } from "@/lib/auth-client";
+import { typeNavbar } from "@/types";
+import Link from "next/link";
+import Spotify from "./svg/spotify";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 interface INavbar {
   profile: string;
@@ -43,8 +41,8 @@ const links: typeNavbar[] = [
     href: "/intl-id/library",
   },
   {
-    name: "Playlists",
-    href: "/intl-id/playlists",
+    name: "Playlist",
+    href: "/intl-id/playlist",
   },
   {
     name: "Top Tracks",
@@ -61,8 +59,10 @@ const links: typeNavbar[] = [
 ];
 
 export default function Navbar({ data }: NavbarProps) {
+  const router = useRouter();
   const handleLogout = async (): Promise<void> => {
     await client.signOut();
+    router.refresh();
   };
 
   return (
@@ -73,12 +73,12 @@ export default function Navbar({ data }: NavbarProps) {
         <Link href={"/intl-id"}>
           <Spotify className="w-8 h-8" />
         </Link>
-        <nav className="hidden md:flex space-x-4">
+        <nav className="hidden md:flex space-x-4 md:items-center">
           {links.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-white hover:text-gray-300 transition pr-4 relative"
+              className="text-white hover:text-gray-300 transition pr-4 relative hover:underline"
             >
               {link.name}
               {index !== links.length - 1 && (
@@ -95,6 +95,7 @@ export default function Navbar({ data }: NavbarProps) {
           <DropdownMenuTrigger asChild className="cursor-pointer">
             <Avatar>
               <AvatarImage src={data.profile} />
+              <AvatarFallback>{data.name[0]}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
@@ -103,7 +104,9 @@ export default function Navbar({ data }: NavbarProps) {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 Profile
-                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                <DropdownMenuShortcut>
+                  <Link href="/intl-id/profile">ctrl + P</Link>
+                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 Billing
@@ -142,7 +145,7 @@ export default function Navbar({ data }: NavbarProps) {
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuItem disabled>API</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               Log out
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>

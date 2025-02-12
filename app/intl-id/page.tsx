@@ -1,9 +1,10 @@
-import { auth } from "@/auth";
-import { fetchSpotifyData, getSpotifyProfile } from "@/lib/action";
+import { getSpotifyClient } from "@/lib/action";
 
-import { headers } from "next/headers";
-import React from "react";
 
 export default async function Page() {
+const g = await getSpotifyClient()
+const data = await g.fetch('/me');
+
+console.log(data);
   return <div>Page</div>;
 }

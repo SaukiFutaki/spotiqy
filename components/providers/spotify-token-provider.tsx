@@ -1,28 +1,24 @@
-"use client";
+// lib/providers.tsx
+'use client';
 
-import React, { createContext, useContext } from "react";
+import { createContext } from 'react';
 
-// Context untuk menyimpan token
-const SpotifyTokenContext = createContext<{ accessToken: string | null }>({
-  accessToken: null,
-});
+type AuthContextType = {
+  accessToken: string | undefined;
+};
 
-// Provider untuk Spotify Access Token
-export function SpotifyTokenProvider({
+export const AuthContext = createContext<AuthContextType>({ accessToken: undefined });
+
+export function AuthProvider({
   children,
   accessToken,
 }: {
   children: React.ReactNode;
-  accessToken: string | null;
+  accessToken: string | undefined;
 }) {
   return (
-    <SpotifyTokenContext.Provider value={{ accessToken }}>
+    <AuthContext.Provider value={{ accessToken }}>
       {children}
-    </SpotifyTokenContext.Provider>
+    </AuthContext.Provider>
   );
-}
-
-// Custom hook untuk mengambil token di dalam komponen
-export function useSpotifyToken() {
-  return useContext(SpotifyTokenContext);
 }

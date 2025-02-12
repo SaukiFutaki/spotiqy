@@ -3,7 +3,6 @@ import LoginComponents from "@/components/login-components";
 import Spotify from "@/components/svg/spotify";
 import { scp } from "@/constants/font";
 
-
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 

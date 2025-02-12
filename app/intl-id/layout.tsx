@@ -1,7 +1,5 @@
 import { auth } from "@/auth";
 import Navbar from "@/components/navbar";
-import { getAccessToken } from "@/lib/action";
-import { Session } from "better-auth";
 import { headers } from "next/headers";
 import React from "react";
 
@@ -13,21 +11,22 @@ export default async function IntlLaout({
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const authorizationToken = await getAccessToken(
-    session?.session.userId ?? ""
-  );
-  console.log(authorizationToken);
+
   return (
-    <div className="bg-[#111111] w-full h-full mt-4">
-      <div>
-        <div className="">
-          <Navbar data={{
-              profile: session?.user?.image as string,
-              name: session?.user?.name as string,
-          }} />
+    // <AuthProvider accessToken={authorizationToken?.accessToken ?? ""}>
+      <div className="bg-[#111111] w-full h-full mt-4">
+        <div>
+          <div className="">
+            <Navbar
+              data={{
+                profile: session?.user?.image as string,
+                name: session?.user?.name as string,
+              }}
+            />
+          </div>
+          <section className="px-[150px]">{children}</section>
         </div>
-        <section>{children}</section>
       </div>
-    </div>
+    // </AuthProvider>
   );
 }
