@@ -1,10 +1,9 @@
-import { Skeleton } from '@/components/ui/skeleton'
-import React from 'react'
+import { CircularBarsSpinnerLoader } from '@/components/cuicui/circular'
 
 export default function loading() {
   return (
-    <div className='bg-black m-20'>
-        <Skeleton className="w-full h-screen " />
+    <div className='flex justify-center items-center h-screen w-screen bg-black'>
+        <CircularBarsSpinnerLoader />
 
     </div>
   )

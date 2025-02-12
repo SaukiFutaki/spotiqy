@@ -14,9 +14,9 @@ export default async function IntlLaout({
 
   return (
     // <AuthProvider accessToken={authorizationToken?.accessToken ?? ""}>
-      <div className="bg-[#111111] w-full h-full mt-4">
+      <div className={`bg-[#111111] w-full h-full mt-4 `}>
         <div>
-          <div className="">
+          <div className="mb-20">
             <Navbar
               data={{
                 profile: session?.user?.image as string,

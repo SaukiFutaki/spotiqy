@@ -1,17 +1,28 @@
 import { getSpotifyClient } from "@/lib/action";
 import { PlaylistCard } from "@/components/playlist/playlist-card";
 import { typePlaylist } from "@/types/spotify";
+import { scp } from "@/constants/font";
 export default async function Page() {
   const spotify = await getSpotifyClient();
-  const profile = await spotify.fetch("/me");
-  const playlists :  { items: typePlaylist[] } = await spotify.fetch("/users/{user_id}/playlists", {
-    user_id: profile.id,
-  });
-  console.log(playlists);
+  const playlist: { items: typePlaylist[] } = await spotify.fetch(
+    "/me/playlists"
+  );
+
+  //   const playlists: { items: typePlaylist[] } = await spotify.fetch(
+  //     "/users/{user_id}/playlists",
+  //     {
+  //       user_id: profile.id,
+  //     }
+  //   );
+  //   console.log(playlists.items[0].owner.display_name);
   return (
-    <div className="px-10">
-      <div>
-        {playlists.items.map((playlist) => (
+    <div className={`px-8 py-6 ${scp.className}`}>
+      <div className="flex items-center space-x-2">
+        <div className="border-l-2 border-green-500 h-6"></div>
+        <h1 className="text-xl font-semibold text-white">Your Playlists</h1>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+        {playlist.items.map((playlist) => (
           <PlaylistCard key={playlist.id} data={playlist} />
         ))}
       </div>
