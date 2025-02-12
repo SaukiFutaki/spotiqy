@@ -1,14 +1,12 @@
 import { auth } from "@/auth";
 import LoginComponents from "@/components/login-components";
 import Spotify from "@/components/svg/spotify";
+import { scp } from "@/constants/font";
 
-import { Source_Code_Pro } from "next/font/google";
+
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-const scp = Source_Code_Pro({
-  subsets: ["latin"],
-  weight: "400",
-});
+
 export default async function Home() {
   const session = await auth.api.getSession({
     headers: await headers(),

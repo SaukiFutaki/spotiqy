@@ -1,3 +1,4 @@
+"use server"
 import { eq } from "drizzle-orm";
 import { db } from "./db/db";
 import { account } from "./db/schema";
@@ -23,3 +24,23 @@ export async function getSpotifyProfile(accessToken: string) {
   return res.json();
 }
 
+
+export async function fetchSpotifyData(userId: string, endpoint: string) {
+    const accessToken = await getAccessToken(userId);
+    
+    if (!accessToken) {
+      throw new Error("Spotify access token is missing");
+    }
+  
+    const response = await fetch(`https://api.spotify.com/v1/${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      cache: "no-store", 
+    });
+  
+
+    console.log(response.json())
+   
+  }
+  
