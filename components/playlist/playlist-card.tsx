@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { TypePlaylist } from "@/types/spotify";
+import { TypePlaylist } from "@/types/playlist";
 
 interface PlaylistCardProps {
   data: TypePlaylist;
@@ -17,8 +17,8 @@ export function PlaylistCard({ data }: PlaylistCardProps) {
   };
 
   const imageLoader = ({ src, width, quality }) => {
-    return `https://example.com/${src}?w=${width}&q=${quality || 75}`
-  }
+    return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+  };
   return (
     <Link
       href={`/intl-id/playlist/${data.id}`}
@@ -46,8 +46,8 @@ export function PlaylistCard({ data }: PlaylistCardProps) {
                 <Image
                   src={data.images[0].url}
                   alt={data.name}
-                    loading="lazy"
-                    // loader={imageLoader}
+                  loading="lazy"
+                  // loader={imageLoader}
                   width={640}
                   height={640}
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -73,7 +73,9 @@ export function PlaylistCard({ data }: PlaylistCardProps) {
               {data.name}
             </h3>
             {data.description === "" ? (
-                <p className="text-sm text-destructive">No description available</p>
+              <p className="text-sm text-destructive">
+                No description available
+              </p>
             ) : (
               <p className="text-sm text-zinc-400 line-clamp-1">
                 {data.description}

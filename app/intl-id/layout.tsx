@@ -1,7 +1,9 @@
 import { auth } from "@/auth";
 import Navbar from "@/components/navbar";
+import { TanstackProviders } from "@/components/providers/tanstack-provider";
 import { headers } from "next/headers";
 import React from "react";
+
 
 export default async function IntlLaout({
   children,
@@ -14,6 +16,7 @@ export default async function IntlLaout({
 
   return (
     // <AuthProvider accessToken={authorizationToken?.accessToken ?? ""}>
+    <TanstackProviders >
       <div className={`bg-[#111111] w-full h-full mt-4 `}>
         <div>
           <div className="mb-20">
@@ -27,6 +30,6 @@ export default async function IntlLaout({
           <section className="px-[150px]">{children}</section>
         </div>
       </div>
-    // </AuthProvider>
+    </TanstackProviders>
   );
 }

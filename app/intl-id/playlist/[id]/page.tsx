@@ -1,7 +1,7 @@
 import PlaylistDetail from "@/components/playlist/playlist-detial-card";
 import { scp } from "@/constants/font";
 import { getSpotifyClient } from "@/lib/action";
-import { TypePlaylistDetail } from "@/types/spotify";
+import { TypePlaylistDetail } from "@/types/playlist";
 import React from "react";
 
 interface IPageProps {
@@ -20,7 +20,7 @@ export default async function Page({ params }: IPageProps) {
     user_id: data.owner.id,
   });
   console.log(profileUserData);
- console.log(data);
+  console.log(data);
   return (
     <div className={`px-8 py-6 ${scp.className}`}>
       <div className="flex items-center space-x-2">
@@ -28,7 +28,10 @@ export default async function Page({ params }: IPageProps) {
         <h1 className="text-xl font-semibold text-white">{data.name}</h1>
       </div>
       <div className=" mt-4">
-        <PlaylistDetail data={data}  profileUserData={profileUserData.images[1].url}/>
+        <PlaylistDetail
+          data={data}
+          profileUserData={profileUserData.images[1].url}
+        />
       </div>
     </div>
   );

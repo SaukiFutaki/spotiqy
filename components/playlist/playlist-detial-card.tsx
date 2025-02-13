@@ -1,6 +1,6 @@
 "use client";
 import { scp } from "@/constants/font";
-import { TypePlaylistDetail } from "@/types/spotify";
+import { TypePlaylistDetail } from "@/types/playlist";
 import { calculateTotalDuration, formatDate, formatDuration } from "@/utils";
 import { Clock, Edit2, MoreHorizontal, Play } from "lucide-react";
 import Image from "next/image";
@@ -44,7 +44,7 @@ export default function PlaylistDetail({
                 alt={data.name}
                 width={640}
                 height={640}
-                className="w-full h-full object-cover shadow-2xl"
+                className="w-full h-full object-cover shadow-2xl border-dashed border-2 border-green-500"
               />
             )}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -57,7 +57,9 @@ export default function PlaylistDetail({
           {/* Playlist Info */}
           <div className="flex flex-col gap-4">
             <div>
-              <h1 className="text-5xl font-bold text-white">{data.name}</h1>
+              <h1 className="text-5xl font-bold text-white border-dashed border-2 border-green-500 p-2">
+                {data.name}
+              </h1>
             </div>
             {data.description && (
               <p className="text-zinc-300">{data.description}</p>

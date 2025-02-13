@@ -1,6 +1,6 @@
 import { getSpotifyClient } from "@/lib/action";
 import { PlaylistCard } from "@/components/playlist/playlist-card";
-import { TypePlaylist } from "@/types/spotify";
+import { TypePlaylist } from "@/types/playlist";
 import { scp } from "@/constants/font";
 export default async function Page() {
   const spotify = await getSpotifyClient();
