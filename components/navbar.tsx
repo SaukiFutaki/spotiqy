@@ -78,12 +78,12 @@ export default function Navbar({ data }: NavbarProps) {
     <motion.header
       style={{ height: headerHeight }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-black/70 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-black/70 backdrop-blur-md shadow-lg " : "bg-transparent "
       }`}
     >
       <motion.div
         style={{ scale }}
-        className={`text-white w-full h-full py-4 px-36 flex items-center justify-between container ${scp.className}`}
+        className={`text-white w-full h-full py-4 px-36 flex items-center justify-between container ${scp.className} `}
       >
         <div className="flex items-center justify-between gap-4">
           <Link href={"/intl-id"}>
@@ -107,8 +107,8 @@ export default function Navbar({ data }: NavbarProps) {
         <div className="flex items-center ">
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="cursor-pointer">
-              <Avatar>
-                <AvatarImage src={data.profile} />
+              <Avatar >
+                <AvatarImage src={data.profile}  />
                 <AvatarFallback>{data.name[0]}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>

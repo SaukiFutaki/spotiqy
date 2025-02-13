@@ -1,10 +1,10 @@
 import { getSpotifyClient } from "@/lib/action";
 import { PlaylistCard } from "@/components/playlist/playlist-card";
-import { typePlaylist } from "@/types/spotify";
+import { TypePlaylist } from "@/types/spotify";
 import { scp } from "@/constants/font";
 export default async function Page() {
   const spotify = await getSpotifyClient();
-  const playlist: { items: typePlaylist[] } = await spotify.fetch(
+  const playlist: { items: TypePlaylist[] } = await spotify.fetch(
     "/me/playlists"
   );
 

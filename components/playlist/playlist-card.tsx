@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { typePlaylist } from "@/types/spotify";
+import { TypePlaylist } from "@/types/spotify";
 
 interface PlaylistCardProps {
-  data: typePlaylist;
+  data: TypePlaylist;
 }
 
 export function PlaylistCard({ data }: PlaylistCardProps) {
@@ -15,6 +15,10 @@ export function PlaylistCard({ data }: PlaylistCardProps) {
     e.preventDefault(); // Prevent navigation
     console.log("putar", data.id);
   };
+
+  const imageLoader = ({ src, width, quality }) => {
+    return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+  }
   return (
     <Link
       href={`/intl-id/playlist/${data.id}`}
@@ -42,6 +46,8 @@ export function PlaylistCard({ data }: PlaylistCardProps) {
                 <Image
                   src={data.images[0].url}
                   alt={data.name}
+                    loading="lazy"
+                    // loader={imageLoader}
                   width={640}
                   height={640}
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -52,7 +58,7 @@ export function PlaylistCard({ data }: PlaylistCardProps) {
                     onClick={handlePlayClick}
                     className="translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 focus:outline-none"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-green-400">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-black/60">
                       <Play className="h-6 w-6 fill-white text-white" />
                     </div>
                   </button>
